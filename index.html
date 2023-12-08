@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas Example</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Canvas Example</h1>
+        <p>Draw on the canvas by clicking and dragging the mouse</p>
+    </header>
+    <article>
+        <h2>Canvas</h2>
+        <canvas id="myCanvas" width="400" height="400" 
+        onmousedown="startDrawing(event)" onmousemove="drawLine(event)" 
+        onmouseup="stopDrawing(event)"></canvas>
+    </article>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var isDrawing = false;
+    function startDrawing(event) {
+        isDrawing = true;
+        var x = event.clientX - canvas.offsetLeft;
+        var y = event.clientY - canvas.offsetTop;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+    function drawLine(event) {
+        if (isDrawing) {
+        var x = event.clientX - canvas.offsetLeft;
+        var y = event.clientY - canvas.offsetTop;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+    }
+    function stopDrawing(event) {
+        isDrawing = false;
+    }
+</script>
+</body>
+
