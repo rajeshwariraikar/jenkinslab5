@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO_URL = 'https://github.com/rajeshwariraikar/jenkinslab5.git'
+'
+        NGINX_PATH = 'C:\\Users\\Admin\\Desktop\\devops0033\\nginx-1.24.0\\nginx-1.24.0\\htmldocs'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Use the checkout step to clone the Git repository
+                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git1', url: 'https://github.com/rajeshwariraikar/jenkinslab5.git']])
+                }
+            }
+        }
+
+        stage('Deploy to Nginx') {
+            steps {
+                script {
+                    // Using the Jenkins workspace variable to reference files
+                    bat 'xcopy /y "C:\\Users\\Admin\\Desktop\\lab5\\index.html""%NGINX_PATH%"'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded! You can add additional steps here.'
+        }
+        failure {
+            echo 'Pipeline failed! You may want to take some actions.'
+        }
+    }
+}
