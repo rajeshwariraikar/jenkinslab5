@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GIT_REPO_URL = 'https://github.com/rajeshwariraikar/jenkinslab5.git'
-'
+
         NGINX_PATH = 'C:\\Users\\Admin\\Desktop\\devops0033\\nginx-1.24.0\\nginx-1.24.0\\htmldocs'
     }
 
